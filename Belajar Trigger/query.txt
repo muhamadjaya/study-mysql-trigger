@@ -1,0 +1,66 @@
+CREATE TABLE transaksi (
+  ID VARCHAR(6) NOT NULL,
+  Nominal DECIMAL(10) NOT NULL,
+  Jenis VARCHAR(6) NOT NULL,
+  Tanggal DATETIME NOT NULL
+);
+
+INSERT INTO transaksi (ID, Nominal, Jenis, Tanggal) VALUES
+('ID-1', 100000, 'Debet', '2018-09-10 16:00:00'),
+('ID-2', 500000, 'Kredit', '2018-09-11 17:00:00'),
+('ID-1', 50000, 'Kredit', '2018-09-11 17:00:00');
+
+
+CREATE TABLE Saldo (
+  ID INT AUTO_INCREMENT PRIMARY KEY,
+  Nama VARCHAR(30) NOT NULL,
+  Saldo DECIMAL(10)
+);
+
+CREATE TABLE Saldo (
+  ID VARCHAR(6) PRIMARY KEY,
+  Nama VARCHAR(30) NOT NULL,
+  Saldo DECIMAL(10)
+);
+
+INSERT INTO Saldo (ID, Nama) VALUES
+('ID-1', 'Budi'),
+('ID-2', 'Dudi');
+
+
+DELIMITER $$
+CREATE TRIGGER trigger_generate_id BEFORE INSERT ON saldo
+FOR EACH ROW
+BEGIN
+  SET NEW.ID = CONCAT('ID-', (SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'saldo'));
+END$$
+DELIMITER ;
+
+
+
+
+
+DELIMITER //
+
+CREATE TRIGGER update_saldo AFTER INSERT ON transaksi
+FOR EACH ROW
+BEGIN
+  IF NEW.Jenis = 'Debet' THEN
+    UPDATE saldo SET Saldo = Saldo + NEW.Nominal WHERE ID = NEW.ID;
+  ELSEIF NEW.Jenis = 'Kredit' THEN
+    UPDATE saldo SET Saldo = Saldo - NEW.Nominal WHERE ID = NEW.ID;
+  END IF;
+END //
+
+DELIMITER ;
+
+
+DELIMITER //
+
+CREATE TRIGGER delete_transaksi BEFORE DELETE ON saldo
+FOR EACH ROW
+BEGIN
+  DELETE FROM transaksi WHERE ID = OLD.ID;
+END //
+
+DELIMITER ;

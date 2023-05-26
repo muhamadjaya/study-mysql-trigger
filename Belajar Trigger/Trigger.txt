@@ -1,0 +1,26 @@
+
+
+DELIMITER //
+
+CREATE TRIGGER update_saldo AFTER INSERT ON transaksi
+FOR EACH ROW
+BEGIN
+  IF NEW.Jenis = 'Debet' THEN
+    UPDATE saldo SET Saldo = Saldo + NEW.Nominal WHERE ID = NEW.ID;
+  ELSEIF NEW.Jenis = 'Kredit' THEN
+    UPDATE saldo SET Saldo = Saldo - NEW.Nominal WHERE ID = NEW.ID;
+  END IF;
+END //
+
+DELIMITER ;
+
+
+DELIMITER //
+
+CREATE TRIGGER delete_transaksi BEFORE DELETE ON saldo
+FOR EACH ROW
+BEGIN
+  DELETE FROM transaksi WHERE ID = OLD.ID;
+END //
+
+DELIMITER ;
