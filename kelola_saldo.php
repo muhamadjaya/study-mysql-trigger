@@ -20,15 +20,15 @@ $datasaldo = query("SELECT * FROM saldo");
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
 
 
-    <title>KAS</title>
+    <title>KAS App</title>
   </head>
   <body>
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm " 
     style="background-color: #ffffff" >
-    <div class="container" style="font-family: 'Manrope', sans-serif;">
-      <a class="navbar-brand" href="#">
-        KAS
+    <div class="container" style="font-family: 'Manrope', sans-serif; font-weight: bold;">
+      <a class="navbar-brand" href="index.php">
+        KAS App
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -49,9 +49,9 @@ $datasaldo = query("SELECT * FROM saldo");
     <!-- akhir navbar -->
 
 
-   <!-- kelola kas -->
+   <!-- tabel data saldo -->
    <br> <br> <br>
-    <section class="kelolakas mb-5" style="min-height: 510px">
+    <section class="kelolasaldo mb-5" style="height: 100vh">
     <div class="container" style="font-family: 'Manrope', sans-serif;">
 
     <div class="row">
@@ -104,7 +104,7 @@ $datasaldo = query("SELECT * FROM saldo");
     </div>
     </div>
     </section>
-   <!-- akhir kelola saldo -->
+   <!-- akhir tabel data saldo -->
 
 
    <!-- footer -->
@@ -112,7 +112,7 @@ $datasaldo = query("SELECT * FROM saldo");
       <div class="container">
         <div class="row pt-3">
           <di class="col text-center">
-            <p>copyright 2023.</p>
+          <p>Created by Muhamad Jaya</p>
           </di>
         </div>
       </div>

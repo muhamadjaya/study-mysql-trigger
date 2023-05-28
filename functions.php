@@ -1,7 +1,5 @@
 <?php
-// koneksi ke database
 $conn = mysqli_connect("localhost","root","","db_kas");
-
 
 function query($query) {
     global $conn;
@@ -12,7 +10,6 @@ function query($query) {
     }
     return $rows;
 }
-
 
 
 function tambah_saldo($data) {
@@ -84,19 +81,31 @@ function tambah_transaksi($data) {
 function ubah_transaksi($data) {
     global $conn;
     $id = $data["id"];
-    $nama = htmlspecialchars($data["nama"]);
-    $saldo = htmlspecialchars($data["saldo"]);
+    $nominal = htmlspecialchars($data["nominal"]);
+    $jenis = htmlspecialchars($data["jenis"]);
+    $tanggal = strip_tags($data["tanggal"]);
 
-     $query = "UPDATE saldo SET
-                nama = '$nama', 
-                saldo = '$saldo'
-                WHERE id = '$id'
+
+
+     $query = "UPDATE transaksi SET
+                nominal = '$nominal', 
+                jenis = '$jenis'
+                WHERE id = '$id' AND tanggal = '$tanggal'
             ";
      
      mysqli_query($conn, $query);
 
      return mysqli_affected_rows($conn);
 }
+
+
+function hapus_transaksi($id, $tanggal) {
+    global $conn;
+    mysqli_query($conn, "DELETE FROM transaksi WHERE id = '$id' AND tanggal = '$tanggal'");
+
+    return mysqli_affected_rows($conn);
+}
+
 
 
 ?>

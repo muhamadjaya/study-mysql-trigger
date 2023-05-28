@@ -17,14 +17,12 @@ $id_saldo = 'ID-' . strval($jumlahdatasaldo["total_rows"] + 1);
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
         
-    <title>KAS</title>
+    <title>KAS App</title>
   </head>
   <body>
 
   <?php
-  // cek tombol submit
   if( isset($_POST["submit"]) ) {
-      // cek insert
       if( tambah_saldo($_POST) > 0 ) {
         echo "
             <script>
@@ -40,8 +38,33 @@ $id_saldo = 'ID-' . strval($jumlahdatasaldo["total_rows"] + 1);
   }
   ?>
 
+  <!-- navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm " 
+    style="background-color: #ffffff" >
+    <div class="container" style="font-family: 'Manrope', sans-serif; font-weight: bold;">
+      <a class="navbar-brand" href="index.php">
+        KAS App
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse mt-2 mb-2 h5" id="navbarNavDropdown">
+        <ul class="navbar-nav ">
+        <li class="nav-item active">
+            <a class="nav-link " href="kelola_saldo.php">Kelola Saldo</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="kelola_transaksi.php">Kelola Transaksi</a>
+        </li>
+
+      </ul>
+      </div>
+      </div>
+    </nav>
+    <!-- akhir navbar -->
+
    <!-- form -->
-    <section class="tambahdatasaldo mb-5 pb-5 mt-5 pt-5" style="min-height: 530px">
+    <section class="tambahdatasaldo mt-5 pt-5" style="height: 100vh">
     <div class="container" style="font-family: 'Manrope', sans-serif;">
     <div class="row justify-content-between">
       
@@ -52,7 +75,7 @@ $id_saldo = 'ID-' . strval($jumlahdatasaldo["total_rows"] + 1);
         <div class="form-group row justify-content-start">
             <label for="id" class="col-sm-3 col-form-label">ID</label> 
             <div class="col-sm-8">
-                <input type="text" class="form-control" name="id" id="id" required autocomplete="off" value="<?= $id_saldo; ?>">
+                <input type="text" class="form-control" name="id" id="id" required autocomplete="off" readonly value="<?= $id_saldo; ?>">
             </div>
         </div>
 
@@ -87,6 +110,18 @@ $id_saldo = 'ID-' . strval($jumlahdatasaldo["total_rows"] + 1);
     </div>
     </section>
    <!-- akhir form -->
+
+      <!-- footer -->
+      <footer class="text-white bg-secondary" style="font-family: 'Manrope', sans-serif;">
+      <div class="container">
+        <div class="row pt-3">
+          <di class="col text-center">
+          <p>Created by Muhamad Jaya</p>
+          </di>
+        </div>
+      </div>
+    </footer> 
+   <!-- akhir footer -->
 
 
     

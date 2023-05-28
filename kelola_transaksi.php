@@ -20,15 +20,15 @@ $datatransaksi = query("SELECT * FROM transaksi");
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
 
 
-    <title>KAS</title>
+    <title>KAS App</title>
   </head>
   <body>
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm " 
     style="background-color: #ffffff" >
-    <div class="container" style="font-family: 'Manrope', sans-serif;">
-      <a class="navbar-brand" href="#">
-        KAS
+    <div class="container" style="font-family: 'Manrope', sans-serif; font-weight: bold;">
+      <a class="navbar-brand" href="index.php">
+        KAS App
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -58,6 +58,7 @@ $datatransaksi = query("SELECT * FROM transaksi");
       <div class="col-md-12">
         <br> <br>
         <a href="tambah_transaksi.php" class="btn btn-primary ml-auto">Tambah Data Transaksi</a>
+        <a href="export_transaksi.php" class="btn btn-success ml-auto">Export Data Transaksi</a>
         <br><br>
 
         <table class="table table-bordered table-hover table-responsive-md" id="example">
@@ -84,7 +85,7 @@ $datatransaksi = query("SELECT * FROM transaksi");
                 </td>
 
                 <td>
-                    <?= $row["Nominal"]; ?>
+                    Rp. <?= substr_replace($row["Nominal"], ",", -3, 0); ?>
                 </td>
                 
                 <td>
@@ -96,8 +97,8 @@ $datatransaksi = query("SELECT * FROM transaksi");
                 </td>
                
                 <td>
-                    <a href="ubah_transaksi.php?id=<?= $row["ID"]; ?>" class="btn btn-warning">Ubah</a>
-                    <a href="hapus_transaksi.php?id=<?= $row["ID"]; ?>" class="btn btn-danger" onclick="return confirm('Yakin akan menghapus data ini?');">Hapus</a>
+                    <a href="ubah_transaksi.php?Tanggal=<?= $row["Tanggal"]; ?>" class="btn btn-warning">Ubah</a>
+                    <a href="hapus_transaksi.php?ID=<?= $row["ID"]; ?>&Tanggal=<?= $row["Tanggal"]; ?>" class="btn btn-danger" onclick="return confirm('Yakin akan menghapus data ini?');">Hapus</a>
                 </td>
             </tr>
             <?php $i++; ?>
